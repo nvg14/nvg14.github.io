@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Lead Engineer - Product Development",
+    "content": "April 2024 - Present",
+    "icon": "assets/images/amagi.png",
+    "sub_title": "Amagi"
+  },
+  {
+    "title": "Software Development Engineer III",
+    "content": "April 2022 - March 2024"
+  },
+  {
+    "title": "Software Development Engineer II",
+    "content": "April 2020 - March 2022"
+  },
+  {
+    "title": "Software Development Engineer I",
+    "content": "April 2019 - March 2020"
+  },
+  {
+    "title": "Software Engineer Intern",
+    "content": "September 2017 - February 2018",
+    "icon": "assets/images/juspay.png",
+    "sub_title": "JUSPAY Technologies"
+  },
+  {
+    "title": "In-Plant Trainee",
+    "content": "September 2017 - February 2018",
+    "icon": "assets/images/isro.png",
+    "sub_title": "ISRO - Indian Space Research Organisation"
+  }
+]
