@@ -1,1 +1,0 @@
-# Essense of neural network
