@@ -1,33 +1,158 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+'use client';
 
-export default function Page() {
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Rating,
+  Card,
+  CardContent,
+  ToggleButton,
+  ToggleButtonGroup,
+  IconButton,
+  Modal,
+  Fade,
+  Backdrop,
+  Slider,
+  TextField,
+  MenuItem
+} from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useState } from "react";
+import SizeRecommendationModal from "./modal";
+
+const product = {
+  title: "Women's Mid Rise '94 Baggy Fit Jeans",
+  price: "$99",
+  originalPrice: "$119",
+  images: ["/jeans1.jpg", "/jeans2.jpg", "/jeans3.jpg"],
+  rating: 4.2,
+  sizes: ["XS", "S", "M", "L", "XL", "XXL", "3XL"],
+  unavailableSizes: ["XL", "XXL", "3XL"],
+  fit: "Baggy Fit",
+  rise: "Mid Rise",
+  length: "Full Length",
+  fabric: "Cotton",
+};
+
+export default function ProductPage() {
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
+
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-        {/* <AcmeLogo /> */}
-      </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <p className={`text-xl text-gray-800 md:text-3xl md:leading-normal`}>
-            <strong>Welcome to Acme.</strong> This is the example for the{' '}
-            <a href="https://nextjs.org/learn/" className="text-blue-500">
-              Next.js Learn Course
-            </a>
-            , brought to you by Vercel.
-          </p>
-          <Link
-            href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
-          >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
-          </Link>
-        </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          {/* Add Hero Images Here */}
-        </div>
-      </div>
-    </main>
+    <Box sx={{ maxWidth: "1200px", mx: "auto", p: 4 }}>
+      <Grid container spacing={4}>
+        {/* Image Section */}
+        <Grid item xs={12} md={6}>
+          <Grid container spacing={2}>
+            {product.images.map((src, idx) => (
+              <Grid item xs={6} key={idx}>
+                <Box
+                  component="img"
+                  src={src}
+                  alt={`Product ${idx + 1}`}
+                  sx={{ width: "100%", borderRadius: 2, boxShadow: 2 }}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+
+        {/* Details Section */}
+        <Grid item xs={12} md={6}>
+          <Typography variant="h5" fontWeight={600}>
+            {product.title}
+          </Typography>
+
+          {/* Price */}
+          <Box mt={1} display="flex" gap={2} alignItems="center">
+            <Typography variant="h6" color="error">
+              {product.price}
+            </Typography>
+            <Typography variant="body1" sx={{ textDecoration: "line-through" }} color="text.secondary">
+              {product.originalPrice}
+            </Typography>
+          </Box>
+
+          {/* Rating */}
+          <Box mt={1} display="flex" alignItems="center" gap={1}>
+            <Rating value={product.rating} readOnly precision={0.1} />
+            <Typography variant="body2" color="text.secondary">
+              {product.rating}/5
+            </Typography>
+          </Box>
+
+          {/* Size Selector */}
+          <Box mt={3}>
+            <Typography fontWeight={500}>Select Size</Typography>
+            <ToggleButtonGroup
+              exclusive
+              value={selectedSize}
+              onChange={(e, newSize) => setSelectedSize(newSize)}
+              sx={{ mt: 1, flexWrap: "wrap" }}
+            >
+              {product.sizes.map((size) => (
+                <ToggleButton
+                  key={size}
+                  value={size}
+                  disabled={product.unavailableSizes.includes(size)}
+                  sx={{ minWidth: 56 }}
+                >
+                  {size}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
+
+            {/* Recommend My Size Button */}
+            <Box mt={2}>
+            <Button variant="outlined" onClick={() => setModalOpen(true)}>
+              Recommend My Size
+            </Button>
+            </Box>
+          </Box>
+
+          {/* Actions */}
+          <Box mt={3} display="flex" gap={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{ flex: 1, textTransform: "none", fontWeight: 500 }}
+            >
+              Add to Bag
+            </Button>
+            <IconButton color="primary" aria-label="wishlist">
+              <FavoriteBorderIcon />
+            </IconButton>
+          </Box>
+
+          {/* Product Info */}
+          <Card variant="outlined" sx={{ mt: 4 }}>
+            <CardContent>
+              <Typography variant="subtitle2"><strong>Fit:</strong> {product.fit}</Typography>
+              <Typography variant="subtitle2"><strong>Rise:</strong> {product.rise}</Typography>
+              <Typography variant="subtitle2"><strong>Length:</strong> {product.length}</Typography>
+              <Typography variant="subtitle2"><strong>Fabric:</strong> {product.fabric}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+
+    {/* <SizeRecommendationModal open={modalOpen} onClose={() => setModalOpen(false)} /> */}
+    <SizeRecommendationModal
+      open={modalOpen}
+      onClose={handleClose}
+      onSelectSize={(size) => {
+        setSelectedSize(size);
+        handleClose();
+      }}
+    />
+    </Box>
   );
 }
+
+export const dynamic = 'error';
