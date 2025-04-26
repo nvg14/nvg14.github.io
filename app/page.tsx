@@ -11,12 +11,6 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   IconButton,
-  Modal,
-  Fade,
-  Backdrop,
-  Slider,
-  TextField,
-  MenuItem
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useState } from "react";

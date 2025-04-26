@@ -126,7 +126,7 @@ const SizeRecommendationModal = ({
             max={120}
             onChange={(e, val) => {
               if (typeof val === 'number') {
-                setHeight(val);
+                setWeight(val);
               }
             }}
             sx={{ mt: 1, mb: 2 }}
@@ -227,7 +227,6 @@ const SizeRecommendationModal = ({
                 src="/size.png"
                 alt="Background Image"
                 layout="fill"
-                objectFit="cover"
                 quality={100}
                 priority
               />
@@ -236,11 +235,26 @@ const SizeRecommendationModal = ({
           
           )}
 
-          <Button
+          {/* <Button
             variant="contained"
             fullWidth
             onClick={() => {
               handleRecommend();
+            }}
+          >
+            {recommendedSize ? "Accept Recommendation" : "Get Recommendation"}
+          </Button> */}
+
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={() => {
+              if (recommendedSize) {
+                onSelectSize(recommendedSize); // Pass selected size to page.tsx
+                onClose();                     // Close the modal
+              } else {
+                handleRecommend();            // Trigger recommendation logic
+              }
             }}
           >
             {recommendedSize ? "Accept Recommendation" : "Get Recommendation"}
