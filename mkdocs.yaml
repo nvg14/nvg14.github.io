@@ -1,0 +1,124 @@
+site_name: Nithin V. Gopal
+site_url: https://nvg14.github.io/
+site_description: >-
+  Personal website and technical blog of Nithin V. Gopal - Lead Engineer specializing in media technology, cloud architecture, and applied deep learning
+use_directory_urls: false
+
+# Repository
+repo_name: nvg14/nvg14.github.io
+repo_url: https://github.com/nvg14/nvg14.github.io
+edit_uri: ""
+
+# Copyright
+copyright: Copyright &copy; 2025 Nithin V. Gopal
+
+# Configuration
+theme:
+  name: material
+  logo: assets/images/nithin-cropped.png
+  favicon: assets/images/favicon.png
+  custom_dir: overrides
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  features:
+    - content.code.annotate
+    - content.tabs.link
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.instant
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.integrate
+    - navigation.footer
+  palette:
+    - scheme: default
+      primary: white
+      accent: grey
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: grey
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+# Plugins
+plugins:
+  - search
+  - mermaid2
+  - include-markdown
+  - table-reader
+  - git-authors
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: datetime
+
+# Extensions
+markdown_extensions:
+  - mdx_truly_sane_lists
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.snippets
+  - neoteroi.timeline
+
+nav:
+  - Home: index.md
+  - Blog:
+    - 2025:
+      - Single neuron neural network: posts/2025/single-neuron-neural-network.md
+
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mtml-chtml.js
+  - optionalConfig.js
+  - https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js
+  - extra-loader.js
+
+extra_css:
+  - css/neoteroi-mkdocs.css
+extra:
+  generator: false

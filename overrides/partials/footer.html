@@ -1,0 +1,82 @@
+{% import "partials/language.html" as lang with context %}
+
+<footer class="md-footer">
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+        <div class="md-copyright__highlight">
+          © 2025 Nithin V. Gopal
+        </div>
+        <p>Built with <a href="https://www.mkdocs.org/" target="_blank">MkDocs</a> and <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank">Material</a></p>
+      </div>
+      {% if config.extra.social %}
+        {% include "partials/social.html" %}
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+<style>
+/* Apply consistent theme styling to all pages */
+.md-content {
+  --md-primary-fg-color: var(--text-primary, #2d3748);
+  --md-primary-bg-color: var(--background, #ffffff);
+  --md-accent-fg-color: var(--accent, #4a5568);
+}
+
+[data-md-color-scheme="slate"] .md-content {
+  --md-primary-fg-color: var(--text-primary, #f7fafc);
+  --md-primary-bg-color: var(--background, #1a202c);
+  --md-accent-fg-color: var(--accent, #e2e8f0);
+}
+
+/* Consistent typography */
+.md-typeset {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary, #2d3748);
+}
+
+.md-typeset code {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Clean footer styling */
+.md-footer {
+  background: var(--background-secondary, #f7fafc);
+  border-top: 1px solid var(--border-light, #e2e8f0);
+}
+
+[data-md-color-scheme="slate"] .md-footer {
+  background: var(--background-secondary, #2d3748);
+  border-top: 1px solid var(--border-light, #4a5568);
+}
+
+.md-footer-meta {
+  padding: 1rem 0;
+}
+
+.md-copyright {
+  color: var(--text-secondary, #718096);
+  font-size: 0.8rem;
+}
+
+.md-copyright__highlight {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.md-copyright p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.md-copyright a {
+  color: var(--text-secondary, #718096);
+  text-decoration: none;
+}
+
+.md-copyright a:hover {
+  color: var(--text-primary, #2d3748);
+}
+</style> 

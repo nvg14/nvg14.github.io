@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Global minimalistic theme variables */
+    :root {
+      --text-primary: #2d3748;
+      --text-secondary: #718096;
+      --text-muted: #a0aec0;
+      --background: #ffffff;
+      --background-secondary: #f7fafc;
+      --border-light: #e2e8f0;
+      --border: #cbd5e0;
+      --accent: #4a5568;
+      --accent-light: #edf2f7;
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --radius: 8px;
+      --radius-sm: 4px;
+    }
+
+    [data-md-color-scheme="slate"] {
+      --text-primary: #f7fafc;
+      --text-secondary: #cbd5e0;
+      --text-muted: #a0aec0;
+      --background: #1a202c;
+      --background-secondary: #2d3748;
+      --border-light: #4a5568;
+      --border: #718096;
+      --accent: #e2e8f0;
+      --accent-light: #2d3748;
+    }
+
+    /* Apply consistent typography */
+    body, .md-typeset {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .md-typeset code, .md-typeset pre {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    /* Clean, minimal header */
+    .md-header {
+      background: var(--background);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: none;
+    }
+
+    /* Consistent content styling */
+    .md-content {
+      background: var(--background);
+    }
+
+    .md-main__inner {
+      margin-top: 0;
+    }
+
+    /* Clean navigation */
+    .md-nav {
+      font-size: 0.9rem;
+    }
+
+    .md-nav__title {
+      font-weight: 600;
+    }
+
+    /* Minimal table styling */
+    .md-typeset table:not([class]) {
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+    }
+
+    .md-typeset table:not([class]) th {
+      background: var(--background-secondary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    /* Clean code blocks */
+    .md-typeset .highlight {
+      background: var(--background-secondary);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+    }
+
+    /* Minimal admonitions */
+    .md-typeset .admonition {
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      background: var(--background-secondary);
+    }
+
+    /* Clean buttons */
+    .md-button {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--background);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .md-button:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+{% endblock %} 

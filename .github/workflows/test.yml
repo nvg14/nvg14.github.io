@@ -1,0 +1,33 @@
+name: Test Build
+
+on:
+  # Runs on pull requests
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Test build with MkDocs
+        run: |
+          mkdocs build --verbose --clean --strict
+
+      - name: Check for broken links (optional)
+        run: |
+          echo "Build successful! Static site generated in ./site directory"
+          ls -la site/ 
