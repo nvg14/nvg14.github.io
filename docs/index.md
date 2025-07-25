@@ -99,9 +99,9 @@ hide:
             <span class="blog-date">2025</span>
             <span class="blog-category">Deep Learning</span>
           </div>
-          <h3 class="blog-title">
-            <a href="/posts/2025/single-neuron-neural-network/">Single Neuron Neural Network</a>
-          </h3>
+                            <h3 class="blog-title">
+                    <a href="/posts/2025/single-neuron-neural-network.html">Single Neuron Neural Network</a>
+                  </h3>
           <p class="blog-excerpt">Understanding the fundamentals of neural networks by building from the ground up with a single neuron implementation.</p>
         </article>
         
@@ -586,7 +586,7 @@ body {
 
 .code-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: var(--space-lg);
 }
 
@@ -609,10 +609,10 @@ body {
 
 .code-header {
   display: flex;
-  justify-content: space-between;
-  align-items: start;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: var(--space-sm);
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 .code-title {
@@ -620,6 +620,10 @@ body {
   font-weight: 600;
   margin: 0;
   line-height: 1.4;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+  white-space: nowrap;
 }
 
 .code-title a {
@@ -714,6 +718,10 @@ body {
   
   .code-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .code-header {
+    gap: var(--space-xs);
   }
   
   .section {
