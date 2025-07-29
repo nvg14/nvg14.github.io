@@ -16,7 +16,7 @@ copyright: Copyright &copy; 2025 Nithin V. Gopal
 theme:
   name: material
   logo: assets/images/nithin-cropped.png
-  favicon: assets/images/favicon.png
+  favicon: assets/images/nithin-cropped.png
   custom_dir: overrides
 
   # Don't include MkDocs' JavaScript
