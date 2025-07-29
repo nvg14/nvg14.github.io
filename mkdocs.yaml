@@ -27,6 +27,8 @@ theme:
   language: en
   features:
     - content.code.annotate
+    - content.code.copy
+    - content.code.select
     - content.tabs.link
     - navigation.sections
     - navigation.top
@@ -36,8 +38,8 @@ theme:
     - search.highlight
     - search.share
     - search.suggest
-    - toc.integrate
     - navigation.footer
+    - navigation.top
   palette:
     - scheme: default
       primary: white
@@ -103,20 +105,20 @@ markdown_extensions:
   - pymdownx.tilde
   - pymdownx.snippets
   - neoteroi.timeline
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
   - Blog:
     - 2025:
       - Single neuron neural network: posts/2025/single-neuron-neural-network.md
+      - Understanding tokens: posts/2025/understanding_tokens.md
+      - Prompt engineering: posts/2025/prompt_engineering.md
 
 extra_javascript:
-  - javascripts/config.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mtml-chtml.js
-  - optionalConfig.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid@8.8.4/dist/mermaid.min.js
-  - extra-loader.js
 
 extra_css:
   - css/neoteroi-mkdocs.css
