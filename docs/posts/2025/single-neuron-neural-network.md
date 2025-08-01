@@ -713,36 +713,209 @@ $$
 L = -\frac{1}{N} \sum_{i=1}^N \left[ y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \right]
 $$
 
-To perform gradient descent, we compute the gradient of the loss with respect to the weights:
+To perform gradient descent, we compute the gradient of the loss with respect to the weights (this is just saying - if I change weights, how does loss get reflected?):
 
 $$
 \frac{\partial L}{\partial w} = \frac{1}{N} X^T (\hat{y} - y)
 $$
 
-Here’s how it’s derived:
+That's a difficult function to understand, so let us break it down - 
 
-1. Compute the derivative of the loss w\.r.t. $z = Xw + b$:
+#### 1. **The Mathematical Gradient**
 
-   $$
-   \frac{\partial L}{\partial z} = \hat{y} - y \quad \text{(using chain rule with sigmoid derivative)}
-   $$
-2. Since $z = Xw + b$, we apply chain rule:
-
-   $$
-   \frac{\partial L}{\partial w} = X^T \cdot \frac{\partial L}{\partial z} = X^T (\hat{y} - y)
-   $$
-3. To get the average gradient:
-
-   $$
-   \frac{\partial L}{\partial w} = \frac{1}{N} X^T (\hat{y} - y)
-   $$
-
-This vectorized expression gives us the gradient for all weights at once. The same logic applies to the bias:
+Let’s start with the loss function. Say we are using **binary cross-entropy**:
 
 $$
-\frac{\partial L}{\partial b} = \frac{1}{N} \sum_{i=1}^N (\hat{y}^{(i)} - y^{(i)})
+L = -\frac{1}{N} \sum_{i=1}^{N} \left[ y^{(i)} \log(\hat{y}^{(i)}) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)}) \right]
 $$
 
+And:
+
+$$
+\hat{y}^{(i)} = \sigma(z^{(i)}) = \sigma(w \cdot x^{(i)} + b)
+$$
+
+We want to compute:
+
+$$
+\frac{\partial L}{\partial w_j}
+$$
+
+Using the **chain rule**:
+
+$$
+\frac{\partial L}{\partial w_j} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial z} \cdot \frac{\partial z}{\partial w_j}
+$$
+
+Now break it down:
+
+##### Step-by-Step Walkthrough: From Chain Rule to Gradient
+
+###### Step 1: The Setup
+
+You're training a neuron with:
+
+* Input vector $x \in \mathbb{R}^n$
+* Weights $w \in \mathbb{R}^n$, bias $b \in \mathbb{R}$
+* Output prediction $\hat{y}$
+* Ground truth $y \in \{0, 1\}$
+
+The neuron computes:
+
+1. Linear combination:
+
+   $$
+   z = w \cdot x + b
+   $$
+
+2. Activation (sigmoid):
+
+   $$
+   \hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}}
+   $$
+
+3. Binary cross-entropy loss:
+
+   $$
+   L = -[y \log(\hat{y}) + (1 - y) \log(1 - \hat{y})]
+   $$
+
+We want to compute:
+
+$$
+\frac{\partial L}{\partial w}
+$$
+
+###### Step 2: Apply the Chain Rule
+
+We express:
+
+$$
+\frac{\partial L}{\partial w} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial z} \cdot \frac{\partial z}{\partial w}
+$$
+
+Break this down step-by-step:
+
+###### Step 3.1: Derivative of Loss w\.r.t Prediction
+
+From the loss function:
+
+$$
+L = -[y \log(\hat{y}) + (1 - y) \log(1 - \hat{y})]
+$$
+
+Differentiating with respect to $\hat{y}$ gives:
+
+$$
+\frac{\partial L}{\partial \hat{y}} = \frac{-y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}}
+$$
+
+But when combined with the derivative of the sigmoid, this simplifies (as you'll see in Step 3.2) to a very efficient form.
+
+###### Step 3.2: Derivative of Sigmoid w\.r.t z
+
+Recall:
+
+$$
+\hat{y} = \sigma(z) = \frac{1}{1 + e^{-z}}
+$$
+
+Then:
+
+$$
+\frac{d\hat{y}}{dz} = \hat{y}(1 - \hat{y})
+$$
+
+When combining steps 3.1 and 3.2 using the chain rule, the derivatives simplify to:
+
+$$
+\frac{\partial L}{\partial z} = \hat{y} - y
+$$
+
+This is a very useful simplification that occurs when using **sigmoid activation + binary cross-entropy loss**.
+
+###### Step 3.3: Derivative of z w\.r.t Weights
+
+Recall that:
+
+$$
+z = w \cdot x + b
+$$
+
+Differentiating with respect to each component of $w$:
+
+$$
+\frac{\partial z}{\partial w_j} = x_j
+\Rightarrow \frac{\partial z}{\partial w} = x
+$$
+
+###### Step 4: Combine All Terms
+
+Using the chain rule:
+
+$$
+\frac{\partial L}{\partial w} = \frac{\partial L}{\partial z} \cdot \frac{\partial z}{\partial w}
+= (\hat{y} - y) \cdot x
+$$
+
+This gives the gradient of the loss with respect to each weight.
+
+###### Step 5: Vectorizing for Multiple Samples
+
+If your dataset contains multiple samples:
+
+* Input matrix $X \in \mathbb{R}^{N \times n}$
+* Predictions $\hat{y} \in \mathbb{R}^{N}$
+* Targets $y \in \mathbb{R}^{N}$
+
+Define the error vector:
+
+$$
+dz = \hat{y} - y
+$$
+
+Then the weight gradient becomes:
+
+$$
+\frac{\partial L}{\partial w} = \frac{1}{N} X^T \cdot dz
+$$
+
+This is where the **dot product** arises in vectorized code:
+
+```python
+dz = y_pred - y  # shape (N,)
+dw = np.dot(X.T, dz) / len(X)  # shape (d,)
+```
+
+
+Multiply all:
+
+$$
+\frac{\partial L}{\partial w_j} = (\hat{y} - y) \cdot x_j
+$$
+
+For all data points:
+
+$$
+\frac{\partial L}{\partial w_j} = \frac{1}{N} \sum_{i=1}^{N} (\hat{y}^{(i)} - y^{(i)}) \cdot x_j^{(i)}
+$$
+
+
+#### 4. **Bias Gradient**
+
+Mathematically:
+
+$$
+\frac{\partial L}{\partial b} = \frac{1}{N} \sum_{i=1}^{N} (\hat{y}^{(i)} - y^{(i)})
+$$
+
+Vectorized:
+
+```python
+db = np.mean(dz)
+```
+
+This transition from derivative formulas to matrix operations is what enables fast learning in deep learning frameworks.
 This derivation confirms that the code:
 
 ```python
