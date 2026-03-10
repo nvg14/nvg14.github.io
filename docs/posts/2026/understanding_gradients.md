@@ -36,19 +36,19 @@ $$
 
 Where:
 
-* (L) = loss
-* (\theta) = model parameters
+* \(L\) = loss
+* \(\theta\) = model parameters
 
 Training updates parameters using the gradient:
 
-[
+$$
 \theta_{new} = \theta - \alpha \nabla L(\theta)
-]
+$$
 
 Where:
 
-* (\alpha) = learning rate
-* (\nabla L(\theta)) = gradient of the loss
+* \(\alpha\) = learning rate
+* \(\nabla L(\theta)\) = gradient of the loss
 
 Intuitively:
 
@@ -89,9 +89,7 @@ The derivative measures **how fast a function changes**.
 Mathematically:
 
 $$
-[
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
-]
 $$
 
 This definition means:
@@ -118,9 +116,9 @@ Finite difference methods approximate derivatives using nearby points.
 
 ## Forward Difference
 
-[
+$$
 f'(x) \approx \frac{f(x+h)-f(x)}{h}
-]
+$$
 
 Python implementation:
 
@@ -137,9 +135,9 @@ We estimate the slope by looking **slightly ahead of x**.
 
 ## Backward Difference
 
-[
+$$
 f'(x) \approx \frac{f(x)-f(x-h)}{h}
-]
+$$
 
 Implementation:
 
@@ -154,9 +152,9 @@ Here we estimate the slope using the point **just behind x**.
 
 ## Central Difference (Best Approximation)
 
-[
+$$
 f'(x) \approx \frac{f(x+h)-f(x-h)}{2h}
-]
+$$
 
 Implementation:
 
@@ -175,21 +173,21 @@ I tested these numerical derivatives on known functions.
 
 Example:
 
-[
+$$
 f(x) = x^2
-]
+$$
 
 Derivative:
 
-[
+$$
 f'(x) = 2x
-]
+$$
 
 At (x = 3):
 
-[
+$$
 f'(3) = 6
-]
+$$
 
 When we compute the numerical derivative, we get values extremely close to 6.
 
@@ -232,29 +230,29 @@ Machine learning models usually depend on **many variables**.
 
 Example function:
 
-[
+$$
 f(x,y)=x^2+y^2
-]
+$$
 
 The gradient is defined as:
 
-[
+$$
 \nabla f =
 \begin{bmatrix}
-\frac{\partial f}{\partial x} \
+\frac{\partial f}{\partial x} \\
 \frac{\partial f}{\partial y}
 \end{bmatrix}
-]
+$$
 
 Which equals:
 
-[
+$$
 \nabla f =
 \begin{bmatrix}
-2x \
+2x \\
 2y
 \end{bmatrix}
-]
+$$
 
 ---
 
@@ -324,11 +322,11 @@ Steps:
 
 To compare gradients we compute:
 
-[
+$$
 \text{Relative Error} =
 \frac{|g_{analytic}-g_{numeric}|}
 {\max(|g_{analytic}|,|g_{numeric}|)}
-]
+$$
 
 If the error is small (e.g. (10^{-6})), the gradients match.
 
@@ -344,15 +342,15 @@ rel_error = abs(ga - gn) / max(abs(ga), abs(gn), 1e-12)
 
 Linear regression model:
 
-[
+$$
 y = wx + b
-]
+$$
 
 Loss function: Mean Squared Error
 
-[
+$$
 L = \frac{1}{N}\sum (wx + b - y)^2
-]
+$$
 
 ---
 
@@ -360,21 +358,19 @@ L = \frac{1}{N}\sum (wx + b - y)^2
 
 Weight gradient:
 
-[
+$$
 \frac{\partial L}{\partial w}
-=============================
-
+=
 \frac{2}{N}\sum (wx + b - y)x
-]
+$$
 
 Bias gradient:
 
-[
+$$
 \frac{\partial L}{\partial b}
-=============================
-
+=
 \frac{2}{N}\sum (wx + b - y)
-]
+$$
 
 I implemented this directly in Python.
 
@@ -396,9 +392,9 @@ Input → Linear Layer → Sigmoid → Binary Cross Entropy Loss
 
 # Sigmoid Function
 
-[
+$$
 \sigma(z) = \frac{1}{1+e^{-z}}
-]
+$$
 
 It converts any real number into a value between **0 and 1**.
 
@@ -408,14 +404,14 @@ This makes it useful for **binary classification**.
 
 # Binary Cross Entropy Loss
 
-[
+$$
 L = -[y\log(a) + (1-y)\log(1-a)]
-]
+$$
 
 Where:
 
-* (y) = true label
-* (a) = predicted probability
+* \(y\) = true label
+* \(a\) = predicted probability
 
 ---
 
@@ -423,9 +419,9 @@ Where:
 
 For **sigmoid + BCE**, the derivative simplifies to:
 
-[
+$$
 \frac{\partial L}{\partial z} = a - y
-]
+$$
 
 This simplification is what makes neural network training efficient.
 
@@ -435,13 +431,13 @@ This simplification is what makes neural network training efficient.
 
 Using the chain rule:
 
-[
+$$
 dw = \frac{1}{N}\sum (a-y)x
-]
+$$
 
-[
+$$
 db = \frac{1}{N}\sum (a-y)
-]
+$$
 
 I implemented these gradients and verified them using gradient checking.
 
