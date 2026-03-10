@@ -30,9 +30,9 @@ The goal of training is simple:
 
 We want to **minimize a loss function**.
 
-[
+$$
 L(\theta)
-]
+$$
 
 Where:
 
@@ -88,9 +88,11 @@ The derivative measures **how fast a function changes**.
 
 Mathematically:
 
+$$
 [
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
 ]
+$$
 
 This definition means:
 
