@@ -96,22 +96,24 @@ hide:
       <div class="blog-grid">
         <article class="blog-card">
           <div class="blog-meta">
+            <span class="blog-date">2026</span>
+            <span class="blog-category">Optimization</span>
+          </div>
+                            <h3 class="blog-title">
+                    <a href="/posts/2026/understanding_gradients.html">Magic of Gradients</a>
+                  </h3>
+          <p class="blog-excerpt">A gentle walkthrough of gradients, loss landscapes, and how they power modern optimization algorithms.</p>
+        </article>
+        
+        <article class="blog-card">
+          <div class="blog-meta">
             <span class="blog-date">2025</span>
             <span class="blog-category">Deep Learning</span>
           </div>
-                            <h3 class="blog-title">
-                    <a href="/posts/2025/single-neuron-neural-network.html">Single Neuron Neural Network</a>
-                  </h3>
+          <h3 class="blog-title">
+            <a href="/posts/2025/single-neuron-neural-network.html">Single Neuron Neural Network</a>
+          </h3>
           <p class="blog-excerpt">Understanding the fundamentals of neural networks by building from the ground up with a single neuron implementation.</p>
-        </article>
-        
-        <article class="blog-card placeholder">
-          <div class="blog-meta">
-            <span class="blog-date">Coming Soon</span>
-            <span class="blog-category">Architecture</span>
-          </div>
-          <h3 class="blog-title">Cloud-Native Media Workflows</h3>
-          <p class="blog-excerpt">Deep dive into designing scalable media processing pipelines in the cloud.</p>
         </article>
         
         <article class="blog-card placeholder">
@@ -159,13 +161,13 @@ hide:
       <article class="code-card">
         <div class="code-header">
           <h3 class="code-title">
-            <a href="https://github.com/nvg14/gradient_descent" target="_blank">Gradient Descent</a>
+            <a href="https://github.com/nvg14/mathing" target="_blank">mathing</a>
           </h3>
-          <span class="code-type">Jupyter Notebook</span>
+          <span class="code-type">Python Project</span>
         </div>
-        <p class="code-description">A small repository to experiment with gradient descent algorithms and optimization techniques.</p>
+        <p class="code-description">A collection of math experiments and explorations in Python.</p>
         <div class="code-tags">
-          <span class="code-tag">Machine Learning</span>
+          <span class="code-tag">Math</span>
           <span class="code-tag">Python</span>
           <span class="code-tag">Jupyter</span>
         </div>

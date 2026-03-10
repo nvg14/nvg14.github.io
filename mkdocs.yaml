@@ -114,6 +114,8 @@ nav:
       - Single neuron neural network: posts/2025/single-neuron-neural-network.md
       - Understanding tokens: posts/2025/understanding_tokens.md
       - Prompt engineering: posts/2025/prompt_engineering.md
+    - 2026:
+      - Magic of gradients: posts/2026/understanding_gradients.md
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
